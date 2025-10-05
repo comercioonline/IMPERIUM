@@ -1,0 +1,2202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMPERIUM - Marketing Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0F0F1E;
+            --secondary: #6C63FF;
+            --accent: #FF6B6B;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --gradient-dark: linear-gradient(135deg, #0F0F1E 0%, #1a1a2e 100%);
+            --text-light: #f8f9fa;
+            --text-dark: #212529;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--secondary);
+            border-radius: 5px;
+        }
+
+        /* Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--secondary);
+            border-radius: 50%;
+            position: fixed;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            transition: all 0.1s ease;
+            z-index: 9999;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            background: rgba(108, 99, 255, 0.1);
+            border-radius: 50%;
+            position: fixed;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 9998;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(15, 15, 30, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(15, 15, 30, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo-crown {
+            width: 35px;
+            height: 35px;
+            margin-right: 10px;
+            filter: drop-shadow(0 0 8px rgba(108, 99, 255, 0.7));
+            animation: crownGlow 3s infinite alternate;
+        }
+
+        @keyframes crownGlow {
+            0% {
+                filter: drop-shadow(0 0 8px rgba(108, 99, 255, 0.7));
+            }
+            100% {
+                filter: drop-shadow(0 0 15px rgba(108, 99, 255, 0.9));
+            }
+        }
+
+        .logo-text {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-dark);
+            z-index: -2;
+        }
+
+        .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--secondary);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.1;
+            }
+            90% {
+                opacity: 0.1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            position: relative;
+        }
+
+        .hero-title-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-crown {
+            width: 70px;
+            height: 70px;
+            margin-right: 20px;
+            filter: drop-shadow(0 0 15px rgba(108, 99, 255, 0.8));
+            animation: floatCrown 4s infinite ease-in-out;
+        }
+
+        @keyframes floatCrown {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(5deg);
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            background: linear-gradient(to right, #fff, #6C63FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content .tagline {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero-service {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .hero-service:hover {
+            transform: translateY(-5px);
+            background: rgba(108, 99, 255, 0.2);
+            border-color: var(--secondary);
+        }
+
+        .hero-visual {
+            position: relative;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .hero-visual-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: float-card 6s infinite ease-in-out;
+        }
+
+        @keyframes float-card {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .floating-card:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-card:nth-child(2) {
+            top: 50%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .floating-card:nth-child(3) {
+            bottom: 20%;
+            left: 30%;
+            animation-delay: 4s;
+        }
+
+        .floating-card i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .floating-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--gradient-1);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.3);
+            animation: fadeInUp 1s ease 0.8s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(108, 99, 255, 0.4);
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, #6C63FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about {
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(255, 107, 107, 0.1) 100%);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .about-features {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .about-feature {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .about-feature:hover {
+            transform: translateX(10px);
+            background: rgba(108, 99, 255, 0.1);
+            border-color: var(--secondary);
+        }
+
+        .about-feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        /* Services Section */
+        .services {
+            background: var(--primary);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary);
+        }
+
+        .service-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--gradient-1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            opacity: 0.9;
+        }
+
+        /* Difference Section */
+        .difference {
+            background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
+        }
+
+        .difference-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .difference-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .difference-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(79, 172, 254, 0.1);
+            border-color: #4facfe;
+        }
+
+        .difference-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+            background: var(--gradient-3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        /* Advantages Section */
+        .advantages {
+            background: var(--primary);
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .advantage-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .advantage-card:hover {
+            transform: translateX(10px);
+            background: rgba(67, 233, 123, 0.1);
+            border-color: #43e97b;
+        }
+
+        .advantage-icon {
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
+            background: var(--gradient-4);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        /* Projects Section */
+        .projects {
+            background: linear-gradient(135deg, rgba(250, 112, 154, 0.1) 0%, rgba(254, 225, 64, 0.1) 100%);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-image::after {
+            opacity: 0.3;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            gap: 1rem;
+        }
+
+        /* Pricing Section */
+.pricing {
+    background: var(--primary);
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    align-items: start; /* Añadido para alinear las tarjetas desde arriba */
+}
+
+.pricing-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+    height: 100%; /* Añadido para que todas las tarjetas tengan la misma altura */
+    display: flex;
+    flex-direction: column; /* Añadido para organizar el contenido verticalmente */
+}
+
+.pricing-card.featured {
+    border-color: var(--secondary);
+    box-shadow: 0 20px 40px rgba(108, 99, 255, 0.3);
+    transform: scale(1.02); /* Reducido de 1.05 a 1.02 para menos desalineación */
+}
+
+.pricing-card.featured::before {
+    content: 'RECOMENDADO';
+    position: absolute;
+    top: 20px;
+    right: -30px;
+    background: var(--gradient-2);
+    color: white;
+    padding: 0.3rem 3rem;
+    transform: rotate(45deg);
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 10; /* Añadido para asegurar que esté por encima */
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+}
+
+.pricing-card.featured:hover {
+    transform: scale(1.02) translateY(-10px); /* Ajustado para coincidir con el nuevo scale */
+}
+
+.pricing-header {
+    padding: 2rem;
+    text-align: center;
+    background: rgba(108, 99, 255, 0.1);
+}
+
+.pricing-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.pricing-price {
+    font-size: 3rem;
+    font-weight: 800;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.pricing-body {
+    padding: 2rem;
+    flex-grow: 1; /* Añadido para que el cuerpo ocupe el espacio disponible */
+    display: flex;
+    flex-direction: column;
+}
+
+.pricing-features {
+    list-style: none;
+    margin-bottom: 2rem;
+    flex-grow: 1; /* Añadido para que la lista ocupe el espacio disponible */
+}
+
+.pricing-features li {
+    padding: 0.8rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pricing-features li:last-child {
+    border-bottom: none;
+}
+
+.pricing-features i {
+    color: var(--secondary);
+}
+
+.pricing-footer {
+    padding: 0 2rem 2rem;
+    margin-top: auto; /* Añadido para empujar el botón hacia abajo */
+}
+
+.pricing-button {
+    width: 100%;
+    padding: 1rem;
+    background: var(--gradient-1);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pricing-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(108, 99, 255, 0.3);
+}
+
+.additional-services {
+    margin-top: 4rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 100%; /* Añadido para asegurar que no exceda el contenedor */
+}
+
+.additional-services h3 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.additional-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.additional-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%; /* Añadido para que todos los elementos tengan la misma altura */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.additional-item:hover {
+    background: rgba(108, 99, 255, 0.1);
+    transform: translateY(-5px);
+}
+
+.additional-item i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    background: var(--gradient-5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(255, 107, 107, 0.1) 100%);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .contact-items {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(108, 99, 255, 0.1);
+            border-color: var(--secondary);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .contact-form {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #667eea;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            background: rgba(108, 99, 255, 0.05);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.3);
+        }
+
+        /* Footer Modernizado */
+        footer {
+            background: linear-gradient(135deg, #0F0F1E 0%, #1a1a2e 100%);
+            position: relative;
+            overflow: hidden;
+            padding-top: 5rem;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M0,0 L100,100 M100,0 L0,100" stroke="rgba(108, 99, 255, 0.05)" stroke-width="1"/></svg>');
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-crown {
+            width: 40px;
+            height: 40px;
+            filter: drop-shadow(0 0 10px rgba(108, 99, 255, 0.7));
+        }
+
+        .footer-logo .logo-text {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.8;
+            max-width: 400px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            width: 45px;
+            height: 45px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: var(--gradient-1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3);
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient-1);
+            border-radius: 3px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .footer-links li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-left: 0;
+        }
+
+        .footer-links li a::before {
+            content: '→';
+            position: absolute;
+            left: -15px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links li a:hover {
+            color: var(--secondary);
+            padding-left: 15px;
+        }
+
+        .footer-links li a:hover::before {
+            opacity: 1;
+            left: 0;
+        }
+
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-contact-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(108, 99, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+        }
+
+        .footer-contact-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-contact-text span {
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+
+        .footer-contact-text p {
+            font-size: 1rem;
+        }
+
+        .footer-newsletter {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .footer-newsletter h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-newsletter p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: white;
+            font-family: inherit;
+        }
+
+        .newsletter-button {
+            padding: 0.8rem 1.2rem;
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-bottom-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--secondary);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-container,
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 15, 30, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 2rem;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            nav ul.active {
+                transform: translateX(0);
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .hero-visual-container {
+                height: 300px;
+            }
+
+            .floating-card {
+                display: none;
+            }
+
+            .cursor,
+            .cursor-follower {
+                display: none;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content .tagline {
+                font-size: 1.2rem;
+            }
+
+            .section-container {
+                padding: 0 1rem;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+        }
+
+        /* WhatsApp Notification */
+        .whatsapp-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .whatsapp-notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .whatsapp-icon {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="header-container">
+            <div class="logo">
+                <svg class="logo-crown" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 16L3 5L8 9L12 2L16 9L21 5L19 16H5Z" fill="url(#crown-gradient)" stroke="url(#crown-gradient)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                        <linearGradient id="crown-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <div class="logo-text">IMPERIUM</div>
+            </div>
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#about">Quiénes Somos</a></li>
+                    <li><a href="#services">Servicios</a></li>
+                    <li><a href="#difference">Diferencia</a></li>
+                    <li><a href="#advantages">Ventajas</a></li>
+                    <li><a href="#projects">Proyectos</a></li>
+                    <li><a href="#pricing">Planes</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-particles" id="particles"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-title-container">
+                    <svg class="hero-crown" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 16L3 5L8 9L12 2L16 9L21 5L19 16H5Z" fill="url(#hero-crown-gradient)" stroke="url(#hero-crown-gradient)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="hero-crown-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#6C63FF;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <h1>IMPERIUM</h1>
+                </div>
+                <p class="tagline">Crea tu propio imperio digital</p>
+                <p style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 2rem;">"Conquista lo digital, conquista tu mercado"</p>
+                <div class="hero-services">
+                    <div class="hero-service">🌐 Marketing Digital</div>
+                    <div class="hero-service">💻 Desarrollo Web</div>
+                    <div class="hero-service">📢 Promoción Online</div>
+                </div>
+                <a href="#contact" class="cta-button">Comenzar Ahora</a>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-visual-container">
+                    <div class="floating-card">
+                        <i class="fas fa-rocket"></i>
+                        <h4>Crecimiento Acelerado</h4>
+                    </div>
+                    <div class="floating-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>Resultados Medibles</h4>
+                    </div>
+                    <div class="floating-card">
+                        <i class="fas fa-users"></i>
+                        <h4>Audiencia Conectada</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="section-container">
+            <div class="section-header fade-in">
+                <h2>Quiénes Somos</h2>
+                <p>Agencia de marketing digital enfocada en resultados excepcionales</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-content fade-in">
+                    <h3>Transformamos ideas en imperios digitales</h3>
+                    <p>En Imperium somos una agencia de marketing digital enfocada en ayudar a empresas y emprendedores a destacar en el mundo online, desarrollando estrategias personalizadas que convierten visitas en clientes.</p>
+                    <p>Nuestro equipo está compuesto por profesionales apasionados que combinan creatividad, estrategia y tecnología para llevar tu marca al siguiente nivel.</p>
+                </div>
+                <div class="about-features fade-in">
+                    <div class="about-feature">
+                        <div class="about-feature-icon">✨</div>
+                        <div>
+                            <h4>Jóvenes, creativos y estratégicos</h4>
+                            <p>Frescura innovadora con experiencia probada</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <div class="about-feature-icon">📊</div>
+                        <div>
+                            <h4>Enfocados en resultados medibles</h4>
+                            <p>Cada acción orientada a generar ROI</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <div class="about-feature-icon">🎯</div>
+                        <div>
+                            <h4>Especialistas en visibilidad y ventas</h4>
+                            <p>Convertimos presencia en conversiones</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="section-container">
+            <div class="section-header fade-in">
+                <h2>Qué Hacemos</h2>
+                <p>Soluciones integrales para tu presencia digital</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">📱</div>
+                    <h3>Redes Sociales</h3>
+                    <p>Gestión y creación de campañas que conectan con tu audiencia y generan clientes reales.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">🌐</div>
+                    <h3>Desarrollo Web</h3>
+                    <p>Sitios web y tiendas online optimizadas para ofrecer la mejor experiencia y maximizar conversiones.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">📈</div>
+                    <h3>SEO y SEM</h3>
+                    <p>Posicionamiento estratégico para dominar los resultados de búsqueda y atraer tráfico cualificado.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">🎨</div>
+                    <h3>Diseño y Branding</h3>
+                    <p>Identidad visual memorable que comunica los valores de tu marca y diferencia de la competencia.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">✉️</div>
+                    <h3>Email Marketing</h3>
+                    <p>Campañas personalizadas y automatización para nutrir leads y fidelizar clientes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Difference Section -->
+    <section id="difference" class="difference">
+        <div class="section-container">
+            <div class="section-header fade-in">
+                <h2>Nuestra Diferencia</h2>
+                <p>Por qué elegir IMPERIUM para tu crecimiento digital</p>
+            </div>
+            <div class="difference-grid">
+                <div class="difference-card fade-in">
+                    <div class="difference-icon">🔥</div>
+                    <h3>Creatividad Impactante</h3>
+                    <p>Contenidos que capturan atención y generan conexión emocional</p>
+                </div>
+                <div class="difference-card fade-in">
+                    <div class="difference-icon">📊</div>
+                    <h3>Estrategias Medibles</h3>
+                    <p>Análisis detallado y reportes claros para decisiones informadas</p>
+                </div>
+                <div class="difference-card fade-in">
+                    <div class="difference-icon">⚡</div>
+                    <h3>Agilidad Total</h3>
+                    <p>Adaptación rápida a tendencias y cambios del mercado digital</p>
+                </div>
+                <div class="difference-card fade-in">
+                    <div class="difference-icon">🎯</div>
+                    <h3>Enfoque en Ventas</h3>
+                    <p>No solo tráfico, generamos clientes reales</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section id="advantages" class="advantages">
+        <div class="section-container">
+            <div class="section-header fade-in">
+                <h2>Ventajas de Contratarnos</h2>
+                <p>Beneficios tangibles para tu negocio</p>
+            </div>
+            <div class="advantages-grid">
+                <div class="advantage-card fade-in">
+                    <div class="advantage-icon">💰</div>
+                    <div>
+                        <h3>Costos Optimizados</h3>
+                        <p>Mayor ROI que publicidad tradicional con presupuestos flexibles</p>
+                    </div>
+                </div>
+                <div class="advantage-card fade-in">
+                    <div class="advantage-icon">🎯</div>
+                    <div>
+                        <h3>Alcance Preciso</h3>
+                        <p>Segmentación avanzada para llegar a tu público ideal</p>
+                    </div>
+                </div>
+                <div class="advantage-card fade-in">
+                    <div class="advantage-icon">🌐</div>
+                    <div>
+                        <h3>Expertos Multiplataforma</h3>
+                        <p>Dominio de todas las plataformas digitales relevantes</p>
+                    </div>
+                </div>
+                <div class="advantage-card fade-in">
+                    <div class="advantage-icon">🔄</div>
+                    <div>
+                        <h3>Acompañamiento 360°</h3>
+                        <p>Soporte completo desde estrategia hasta ejecución</p>
+                    </div>
+                </div>
+                <div class="advantage-card fade-in">
+                    <div class="advantage-icon">📈</div>
+                    <div>
+                        <h3>Escalabilidad Garantizada</h3>
+                        <p>Crecemos contigo, desde startup hasta líder del mercado</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="section-container">
+            <div class="section-header fade-in">
+                <h2>Proyectos Actuales</h2>
+                <p>Casos de éxito que estamos construyendo</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <img src="Imagenes de Inicio/ferreteria moderna.png" alt="">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Ferretería Moderna Startrhee</h3>
+                        <p>Los mejores precios del mercado para público general y ventas mayoristas.</p>
+                        <a href="https://comercioonline.github.io/FerreteriaStarthre/Inicio" class="project-link">Ver proyecto <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <img src="Imagenes de Inicio/CSR.png" alt="">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Mipime CSR s.r.l</h3>
+                        <p>Especialistas en piezas de autos y contenedores a precios competitivos.</p>
+                        <a href="https://comercioonline.github.io/CSR/Inicio" class="project-link">Ver proyecto <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-header fade-in" style="margin-top: 4rem;">
+                <h2>Ejemplos de Trabajo</h2>
+                <p>Muestra de nuestro desarrollo web</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <img src="Imagenes de Inicio/perfume 3.jpg" alt="">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Contenedores</h3>
+                        <p>Plataforma de venta de productos comerciales</p>
+                        <a href="https://comercioonline.github.io/comercioonline/Contenedores%20Actualizado.html" target="_blank" class="project-link">Ver ejemplo <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image" style="background-image: url('https://picsum.photos/seed/realestate/400/300.jpg');"></div>
+                    <div class="project-content">
+                        <h3 class="project-title">DreamHouse</h3>
+                        <p>Portal inmobiliario con propiedades en venta</p>
+                        <a href="https://comercioonline.github.io/DreamHouse/Propiedades%20en%20Venta" target="_blank" class="project-link">Ver ejemplo <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image" style="background-image: url('https://picsum.photos/seed/furniture/400/300.jpg');"></div>
+                    <div class="project-content">
+                        <h3 class="project-title">Arte Moderno</h3>
+                        <p>Galería de Arte y exclusivas de artistas emergentes y consagrados</p>
+                        <a href="https://comercioonline.github.io/Artemoderno/galeria" target="_blank" class="project-link">Ver ejemplo <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="section-container">
+            <div class="section-header fade-in">
+                <h2>Planes de Desarrollo Web</h2>
+                <p>Soluciones a medida para cada necesidad y presupuesto</p>
+            </div>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card fade-in">
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">Plan Básico</h3>
+                        <div class="pricing-price">$80</div>
+                        <p style="opacity: 0.8;">USD</p>
+                    </div>
+                    <div class="pricing-body">
+                        <p style="text-align: center; margin-bottom: 1.5rem;">Ideal para emprendimientos</p>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> Landing Page simple</li>
+                            <li><i class="fas fa-check"></i> Diseño responsive</li>
+                            <li><i class="fas fa-check"></i> Hasta 3 secciones</li>
+                            <li><i class="fas fa-check"></i> Integración redes sociales</li>
+                            <li><i class="fas fa-check"></i> Formulario de contacto</li>
+                            <li><i class="fas fa-check"></i> Entrega: 3-5 días</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-footer">
+                        <button class="pricing-button" onclick="selectPlan('Básico', '$80')">Elegir Plan</button>
+                    </div>
+                </div>
+                
+                <div class="pricing-card featured fade-in">
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">Plan Intermedio</h3>
+                        <div class="pricing-price">$150</div>
+                        <p style="opacity: 0.8;">USD</p>
+                    </div>
+                    <div class="pricing-body">
+                        <p style="text-align: center; margin-bottom: 1.5rem;">Perfecto para pequeñas empresas</p>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> Hasta 5 páginas</li>
+                            <li><i class="fas fa-check"></i> Diseño personalizado</li>
+                            <li><i class="fas fa-check"></i> Galería de productos</li>
+                            <li><i class="fas fa-check"></i> Notificaciones por email</li>
+                            <li><i class="fas fa-check"></i> SEO básico</li>
+                            <li><i class="fas fa-check"></i> Google Maps</li>
+                            <li><i class="fas fa-check"></i> Entrega: 5-7 días</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-footer">
+                        <button class="pricing-button" onclick="selectPlan('Intermedio', '$150')">Elegir Plan</button>
+                    </div>
+                </div>
+                
+                <div class="pricing-card fade-in">
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">Plan Premium</h3>
+                        <div class="pricing-price">$250</div>
+                        <p style="opacity: 0.8;">USD</p>
+                    </div>
+                    <div class="pricing-body">
+                        <p style="text-align: center; margin-bottom: 1.5rem;">Para negocios profesionales</p>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> Hasta 10 páginas</li>
+                            <li><i class="fas fa-check"></i> Tienda online</li>
+                            <li><i class="fas fa-check"></i> Panel admin</li>
+                            <li><i class="fas fa-check"></i> SEO avanzado</li>
+                            <li><i class="fas fa-check"></i> Chat integrado</li>
+                            <li><i class="fas fa-check"></i> Certificado SSL</li>
+                            <li><i class="fas fa-check"></i> Entrega: 7-10 días</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-footer">
+                        <button class="pricing-button" onclick="selectPlan('Premium', '$250')">Elegir Plan</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="additional-services fade-in">
+                <h3>Servicios Adicionales</h3>
+                <div class="additional-grid">
+                    <div class="additional-item">
+                        <i class="fas fa-globe"></i>
+                        <h4>Dominio + Hosting</h4>
+                        <p>Desde $30 USD/año</p>
+                    </div>
+                    <div class="additional-item">
+                        <i class="fas fa-pen"></i>
+                        <h4>Redacción</h4>
+                        <p>Desde $20 USD</p>
+                    </div>
+                    <div class="additional-item">
+                        <i class="fas fa-tools"></i>
+                        <h4>Mantenimiento</h4>
+                        <p>$15-30 USD/mes</p>
+                    </div>
+                    <div class="additional-item">
+                        <i class="fas fa-credit-card"></i>
+                        <h4> Pagos Online</h4>
+                        <p>$20 USD</p>
+                    </div>
+                    <div class="additional-item">
+                        <i class="fas fa-envelope"></i>
+                        <h4>Email Profesional</h4>
+                        <p>$5-10 USD</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="section-container">
+            <div class="section-header fade-in">
+                <h2>Construyamos Juntos</h2>
+                <p>En IMPERIUM no solo promocionamos productos, construimos marcas digitales que conquistan</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info fade-in">
+                    <h3>Hablemos de tu proyecto</h3>
+                    <p>Estamos listos para transformar tu visión en realidad digital. Contáctanos y comencemos a construir tu imperio.</p>
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>mundodigital930518@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                            <div>
+                                <h4>Teléfono</h4>
+                                <p>+ 53 56578961</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                            <div>
+                                <h4>Horario</h4>
+                                <p>Lun-Dom: 8:00am - 22:00pm</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form fade-in">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nombre Completo</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="plan">Plan de Interés</label>
+                            <select id="plan" name="plan">
+                                <option value="">Selecciona un plan</option>
+                                <option value="basico">Plan Básico - $80 USD</option>
+                                <option value="intermedio">Plan Intermedio - $150 USD</option>
+                                <option value="premium">Plan Premium - $250 USD</option>
+                                <option value="otro">Otro servicio</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Modernizado -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg class="logo-crown" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 16L3 5L8 9L12 2L16 9L21 5L19 16H5Z" fill="url(#crown-gradient)" stroke="url(#crown-gradient)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                            <defs>
+                                <linearGradient id="crown-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="logo-text">IMPERIUM</div>
+                    </div>
+                    <p class="footer-description">Transformamos ideas en imperios digitales. Conquista lo digital, conquista tu mercado.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/56578961" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Inicio</a></li>
+                        <li><a href="#about">Quiénes Somos</a></li>
+                        <li><a href="#services">Servicios</a></li>
+                        <li><a href="#difference">Diferencia</a></li>
+                        <li><a href="#advantages">Ventajas</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Servicios</h3>
+                    <ul class="footer-links">
+                        <li><a href="#services">Marketing Digital</a></li>
+                        <li><a href="#services">Desarrollo Web</a></li>
+                        <li><a href="#services">SEO y SEM</a></li>
+                        <li><a href="#services">Diseño y Branding</a></li>
+                        <li><a href="#services">Email Marketing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <div class="footer-contact">
+                        <div class="footer-contact-item">
+                            <div class="footer-contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div class="footer-contact-text">
+                                <span>Email</span>
+                                <p>mundodigital930518@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="footer-contact-item">
+                            <div class="footer-contact-icon"><i class="fas fa-phone"></i></div>
+                            <div class="footer-contact-text">
+                                <span>Teléfono</span>
+                                <p>+ 53 56578961</p>
+                            </div>
+                        </div>
+                        <div class="footer-contact-item">
+                            <div class="footer-contact-icon"><i class="fas fa-clock"></i></div>
+                            <div class="footer-contact-text">
+                                <span>Horario</span>
+                                <p>Lun-Dom: 8:00am - 22:00pm</p>
+                            </div>
+                        </div>
+                    </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2025 IMPERIUM - Marketing Digital. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Notification -->
+    <div class="whatsapp-notification" id="whatsappNotification">
+        <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.149-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.123-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+        <span>Enviando mensaje a WhatsApp...</span>
+    </div>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                navMenu.classList.remove('active');
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Particles Background
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 5 + 1;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = Math.random() * 20 + 20 + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Fade In Animation on Scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const phone = formData.get('phone');
+            const plan = formData.get('plan');
+            const message = formData.get('message');
+            
+            const subject = 'Consulta desde IMPERIUM - Marketing Digital';
+            const body = `Nombre: ${name}\nEmail: ${email}\nTeléfono: ${phone}\nPlan de interés: ${plan}\n\nMensaje:\n${message}`;
+            
+            window.location.href = `mailto:mundodigital930518@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Show success message
+            const formContainer = document.querySelector('.contact-form');
+            const successMessage = document.createElement('div');
+            successMessage.style.cssText = `
+                background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+                color: white;
+                padding: 1rem;
+                border-radius: 10px;
+                margin-top: 1rem;
+                text-align: center;
+                font-weight: 600;
+            `;
+            successMessage.textContent = '¡Mensaje enviado! Te contactaremos pronto.';
+            
+            formContainer.appendChild(successMessage);
+            this.reset();
+            
+            setTimeout(() => {
+                successMessage.remove();
+            }, 5000);
+        });
+
+        // Select Plan Function - Modified to send WhatsApp message
+        function selectPlan(planName, planPrice) {
+            // Show notification
+            const notification = document.getElementById('whatsappNotification');
+            notification.classList.add('show');
+            
+            // Create WhatsApp message
+            const phoneNumber = '56578961';
+            const message = `Hola, estoy interesado en el ${planName} de desarrollo web con un precio de ${planPrice} USD. Me gustaría obtener más información.`;
+            
+            // Open WhatsApp
+            setTimeout(() => {
+                window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                
+                // Hide notification after a delay
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }, 1000);
+            
+            // Also set the plan in the contact form
+            document.getElementById('plan').value = planName.toLowerCase();
+        }
+
+        // Newsletter Subscription
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('.newsletter-input').value;
+            
+            // Show success message
+            const formContainer = event.target.parentElement;
+            const successMessage = document.createElement('div');
+            successMessage.style.cssText = `
+                background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+                color: white;
+                padding: 0.8rem;
+                border-radius: 10px;
+                margin-top: 1rem;
+                text-align: center;
+                font-weight: 600;
+                font-size: 0.9rem;
+            `;
+            successMessage.textContent = '¡Gracias por suscribirte! Te enviaremos las últimas novedades.';
+            
+            formContainer.appendChild(successMessage);
+            event.target.reset();
+            
+            setTimeout(() => {
+                successMessage.remove();
+            }, 5000);
+        }
+
+        // Add hover effect to cards
+        document.querySelectorAll('.service-card, .difference-card, .advantage-card, .project-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Typing Effect for Hero Title
+        const heroTitle = document.querySelector('.hero-content h1');
+        const text = heroTitle.innerText;
+        heroTitle.innerText = '';
+        let index = 0;
+
+        function typeWriter() {
+            if (index < text.length) {
+                heroTitle.innerText += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+
+        setTimeout(typeWriter, 500);
+    </script>
+</body>
+</html>
