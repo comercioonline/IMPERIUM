@@ -21,6 +21,7 @@
             --text-dark: #212529;
             --glass-bg: rgba(255, 255, 255, 0.1);
             --glass-border: rgba(255, 255, 255, 0.2);
+            --blue-bg: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
         }
 
         * {
@@ -35,6 +36,11 @@
             color: var(--text-light);
             overflow-x: hidden;
             line-height: 1.6;
+            transition: background 0.5s ease;
+        }
+
+        body.blue-theme {
+            background: var(--blue-bg);
         }
 
         /* Scrollbar */
@@ -206,6 +212,11 @@
             height: 100%;
             background: var(--gradient-dark);
             z-index: -2;
+            transition: background 0.5s ease;
+        }
+
+        body.blue-theme .hero-bg {
+            background: var(--blue-bg);
         }
 
         .hero-particles {
@@ -904,7 +915,7 @@
             background-clip: text;
         }
 
-        /* Contact Section */
+        /* Contact Section - Diseño Moderno con Progreso */
         .contact {
             background: linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(255, 107, 107, 0.1) 100%);
         }
@@ -963,22 +974,226 @@
             font-size: 1.5rem;
         }
 
+        /* Nuevo Diseño del Formulario */
         .contact-form {
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
             padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-form.progress-active::before {
+            transform: scaleX(1);
+        }
+
+        .form-progress-container {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .form-progress-circle {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1rem;
+            position: relative;
+        }
+
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring-bg {
+            stroke: rgba(255, 255, 255, 0.1);
+            fill: none;
+            stroke-width: 8;
+        }
+
+        .progress-ring-fill {
+            stroke: url(#progress-gradient);
+            fill: none;
+            stroke-width: 8;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.5s ease;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .progress-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .form-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 0;
+        }
+
+        .step {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            flex: 1;
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            margin: 0 auto 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .step.active .step-circle {
+            background: var(--gradient-1);
+            border-color: transparent;
+            transform: scale(1.1);
+        }
+
+        .step.completed .step-circle {
+            background: var(--gradient-4);
+            border-color: transparent;
+        }
+
+        .step-label {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .step.active .step-label {
+            opacity: 1;
+            font-weight: 600;
+        }
+
+        .form-field-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .form-field-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(108, 99, 255, 0.3);
+        }
+
+        .form-field-card.filled {
+            background: rgba(67, 233, 123, 0.1);
+            border-color: rgba(67, 233, 123, 0.3);
+        }
+
+        .form-field-card.active {
+            background: rgba(108, 99, 255, 0.1);
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.2);
+        }
+
+        .field-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .field-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .field-title {
+            flex: 1;
+        }
+
+        .field-title label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .field-subtitle {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .field-status {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .field-status.filled {
+            background: var(--gradient-4);
+        }
+
+        .field-status i {
+            font-size: 0.8rem;
+            color: white;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
+            margin-bottom: 0;
         }
 
         .form-group input,
@@ -992,6 +1207,7 @@
             color: var(--text-light);
             font-family: inherit;
             transition: all 0.3s ease;
+            font-size: 1rem;
         }
 
         .form-group input:focus,
@@ -1000,6 +1216,8 @@
             outline: none;
             border-color: var(--secondary);
             background: rgba(108, 99, 255, 0.05);
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+            color: #0F0F1E;
         }
 
         .form-group textarea {
@@ -1007,22 +1225,96 @@
             min-height: 120px;
         }
 
+        .char-counter {
+            text-align: right;
+            font-size: 0.8rem;
+            opacity: 0.6;
+            margin-top: 0.5rem;
+        }
+
         .submit-button {
             width: 100%;
-            padding: 1rem;
+            padding: 1.2rem;
             background: var(--gradient-1);
             color: white;
             border: none;
-            border-radius: 50px;
-            font-weight: 600;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .submit-button:hover::before {
+            left: 100%;
         }
 
         .submit-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.4);
+        }
+
+        .submit-button:active {
+            transform: translateY(-1px);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .contact-urgency {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-urgency i {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .contact-urgency p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .contact-benefits {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-benefit {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .contact-benefit i {
+            color: var(--secondary);
         }
 
         /* Footer Modernizado */
@@ -1642,6 +1934,28 @@
             .modal-button {
                 width: 100%;
             }
+
+            .contact-benefits {
+                grid-template-columns: 1fr;
+            }
+
+            .form-progress-circle {
+                width: 100px;
+                height: 100px;
+            }
+
+            .progress-text {
+                font-size: 1.5rem;
+            }
+
+            .form-steps {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .step {
+                flex: 0 0 calc(50% - 0.5rem);
+            }
         }
 
         @media (max-width: 480px) {
@@ -1742,6 +2056,25 @@
                 font-size: 24px;
                 bottom: 20px;
                 right: 20px;
+            }
+
+            .form-field-card {
+                padding: 1rem;
+            }
+
+            .field-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .field-icon {
+                width: 35px;
+                height: 35px;
+            }
+
+            .step {
+                flex: 0 0 100%;
             }
         }
     </style>
@@ -2195,70 +2528,196 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact Section - Nuevo Diseño con Progreso -->
     <section id="contact" class="contact">
         <div class="section-container">
             <div class="section-header fade-in">
-                <h2>Construyamos Juntos</h2>
-                <p>En IMPERIUM no solo promocionamos productos, construimos marcas digitales que conquistan</p>
+                <h2>Comienza tu Conquista Digital</h2>
+                <p>El primer paso hacia tu imperio está a un solo clic de distancia</p>
             </div>
             <div class="contact-grid">
                 <div class="contact-info fade-in">
-                    <h3>Hablemos de tu proyecto</h3>
-                    <p>Estamos listos para transformar tu visión en realidad digital. Contáctanos y comencemos a construir tu imperio.</p>
-                    <div class="contact-items">
-                        <div class="contact-item">
-                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                            <div>
-                                <h4>Email</h4>
-                                <p>mundodigital930518@gmail.com</p>
-                            </div>
+                    <h3>¿Listo para dominar tu mercado?</h3>
+                    <p>Nuestro equipo de expertos está preparado para transformar tu visión en una estrategia digital imparable. Cada momento que esperas es una oportunidad que tu competencia aprovecha.</p>
+                    
+                    <div class="contact-urgency">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p><strong>¡Actúa ahora!</strong> Las primeras 10 consultas de este mes recibirán un análisis competitivo gratuito.</p>
+                    </div>
+                    
+                    <div class="contact-benefits">
+                        <div class="contact-benefit">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Respuesta en menos de 24 horas</span>
                         </div>
+                        <div class="contact-benefit">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Diagnóstico sin compromiso</span>
+                        </div>
+                        <div class="contact-benefit">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Estrategia personalizada</span>
+                        </div>
+                        <div class="contact-benefit">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Resultados medibles desde el primer mes</span>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-items">
                         <div class="contact-item">
                             <div class="contact-icon"><i class="fas fa-phone"></i></div>
                             <div>
-                                <h4>Teléfono</h4>
+                                <h4>Llámanos ahora</h4>
+                                <p>+ 53 56578961</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+                            <div>
+                                <h4>WhatsApp directo</h4>
                                 <p>+ 53 56578961</p>
                             </div>
                         </div>
                         <div class="contact-item">
                             <div class="contact-icon"><i class="fas fa-clock"></i></div>
                             <div>
-                                <h4>Horario</h4>
+                                <h4>Disponibilidad inmediata</h4>
                                 <p>Lun-Dom: 8:00am - 22:00pm</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="contact-form fade-in">
+                <div class="contact-form fade-in" id="contactFormContainer">
+                    <!-- Indicador de Progreso -->
+                    <div class="form-progress-container">
+                        <div class="form-progress-circle">
+                            <svg width="120" height="120" class="progress-ring">
+                                <defs>
+                                    <linearGradient id="progress-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="60" cy="60" r="54" class="progress-ring-bg"></circle>
+                                <circle cx="60" cy="60" r="54" class="progress-ring-fill" 
+                                        stroke-dasharray="339.292" 
+                                        stroke-dashoffset="339.292"></circle>
+                            </svg>
+                            <div class="progress-text" id="progressText">0%</div>
+                        </div>
+                        <div class="progress-label">Completando tu conquista digital</div>
+                    </div>
+
+                    <!-- Pasos del Formulario -->
+                    <div class="form-steps">
+                        <div class="step" data-step="1">
+                            <div class="step-circle">1</div>
+                            <div class="step-label">Identificación</div>
+                        </div>
+                        <div class="step" data-step="2">
+                            <div class="step-circle">2</div>
+                            <div class="step-label">Contacto</div>
+                        </div>
+                        <div class="step" data-step="3">
+                            <div class="step-circle">3</div>
+                            <div class="step-label">Servicio</div>
+                        </div>
+                        <div class="step" data-step="4">
+                            <div class="step-circle">4</div>
+                            <div class="step-label">Mensaje</div>
+                        </div>
+                    </div>
+
                     <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Nombre Completo</label>
-                            <input type="text" id="name" name="name" required>
+                        <!-- Campo Nombre -->
+                        <div class="form-field-card" data-field="name">
+                            <div class="field-header">
+                                <div class="field-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="field-title">
+                                    <label for="name">Nombre Completo</label>
+                                    <div class="field-subtitle">¿Cómo te llamamos?</div>
+                                </div>
+                                <div class="field-status">
+                                    <i class="fas fa-check" style="display: none;"></i>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" required placeholder="Ej: Juan Pérez">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email">
+
+                        <!-- Campo Teléfono -->
+                        <div class="form-field-card" data-field="phone">
+                            <div class="field-header">
+                                <div class="field-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="field-title">
+                                    <label for="phone">Teléfono</label>
+                                    <div class="field-subtitle">Con código de país</div>
+                                </div>
+                                <div class="field-status">
+                                    <i class="fas fa-check" style="display: none;"></i>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" id="phone" name="phone" required placeholder="Ej: +53 5xxxxxxx">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="phone">Teléfono</label>
-                            <input type="tel" id="phone" name="phone">
+
+                        <!-- Campo Plan -->
+                        <div class="form-field-card" data-field="plan">
+                            <div class="field-header">
+                                <div class="field-icon">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                                <div class="field-title">
+                                    <label for="plan">Plan de Interés</label>
+                                    <div class="field-subtitle">Elige tu conquista</div>
+                                </div>
+                                <div class="field-status">
+                                    <i class="fas fa-check" style="display: none;"></i>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <select id="plan" name="plan" required>
+                                    <option value="">Selecciona un plan</option>
+                                    <option value="basico">Plan Básico - $80 USD</option>
+                                    <option value="intermedio">Plan Intermedio - $150 USD</option>
+                                    <option value="premium">Plan Premium - $250 USD</option>
+                                    <option value="otro">Otro servicio</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="plan">Plan de Interés</label>
-                            <select id="plan" name="plan">
-                                <option value="">Selecciona un plan</option>
-                                <option value="basico">Plan Básico - $80 USD</option>
-                                <option value="intermedio">Plan Intermedio - $150 USD</option>
-                                <option value="premium">Plan Premium - $250 USD</option>
-                                <option value="otro">Otro servicio</option>
-                            </select>
+
+                        <!-- Campo Mensaje -->
+                        <div class="form-field-card" data-field="message">
+                            <div class="field-header">
+                                <div class="field-icon">
+                                    <i class="fas fa-message"></i>
+                                </div>
+                                <div class="field-title">
+                                    <label for="message">Tu Proyecto</label>
+                                    <div class="field-subtitle">Cuéntanos tu visión</div>
+                                </div>
+                                <div class="field-status">
+                                    <i class="fas fa-check" style="display: none;"></i>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" name="message" required placeholder="Describe brevemente tu idea o necesidad..." maxlength="500"></textarea>
+                                <div class="char-counter">
+                                    <span id="charCount">0</span> / 500 caracteres
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="message">Mensaje</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-button">Enviar Mensaje</button>
+
+                        <button type="submit" class="submit-button" id="submitBtn" disabled>
+                            INICIAR MI CONQUISTA DIGITAL
+                        </button>
                     </form>
                 </div>
             </div>
@@ -2316,13 +2775,6 @@
                     <h3>Contacto</h3>
                     <div class="footer-contact">
                         <div class="footer-contact-item">
-                            <div class="footer-contact-icon"><i class="fas fa-envelope"></i></div>
-                            <div class="footer-contact-text">
-                                <span>Email</span>
-                                <p>mundodigital930518@gmail.com</p>
-                            </div>
-                        </div>
-                        <div class="footer-contact-item">
                             <div class="footer-contact-icon"><i class="fas fa-phone"></i></div>
                             <div class="footer-contact-text">
                                 <span>Teléfono</span>
@@ -2330,6 +2782,13 @@
                                 <p>+ 53 56079861 Ricardo</p>
                                 <p>+ 53 51597060 Raidel Carrera</p>
                                 <p>+ 1 (305) 360-6023  Metrolux Solutions Inc</p>
+                            </div>
+                        </div>
+                        <div class="footer-contact-item">
+                            <div class="footer-contact-icon"><i class="fab fa-whatsapp"></i></div>
+                            <div class="footer-contact-text">
+                                <span>WhatsApp</span>
+                                <p>+ 53 56578961</p>
                             </div>
                         </div>
                         <div class="footer-contact-item">
@@ -2366,7 +2825,7 @@
                     <i class="fab fa-whatsapp"></i> WhatsApp
                 </button>
                 <button class="modal-button modal-button-form" onclick="goToContactForm()">
-                    <i class="fas fa-envelope"></i> Formulario
+                    <i class="fas fa-phone"></i> Formulario
                 </button>
                 <button class="modal-button modal-button-close" onclick="closePlanModal()">Cerrar</button>
             </div>
@@ -2505,21 +2964,144 @@
             observer.observe(el);
         });
 
-        // Form Submission
+        // Sistema de Progreso del Formulario
+        const formFields = {
+            name: false,
+            phone: false,
+            plan: false,
+            message: false
+        };
+
+        function updateProgress() {
+            const totalFields = Object.keys(formFields).length;
+            const filledFields = Object.values(formFields).filter(Boolean).length;
+            const percentage = Math.round((filledFields / totalFields) * 100);
+            
+            // Actualizar círculo de progreso
+            const progressRing = document.querySelector('.progress-ring-fill');
+            const circumference = 2 * Math.PI * 54;
+            const offset = circumference - (percentage / 100) * circumference;
+            progressRing.style.strokeDashoffset = offset;
+            
+            // Actualizar texto de progreso
+            document.getElementById('progressText').textContent = percentage + '%';
+            
+            // Actualizar pasos
+            updateSteps(filledFields);
+            
+            // Activar/desactivar botón de envío
+            const submitBtn = document.getElementById('submitBtn');
+            if (percentage === 100) {
+                submitBtn.disabled = false;
+                document.getElementById('contactFormContainer').classList.add('progress-active');
+            } else {
+                submitBtn.disabled = true;
+                document.getElementById('contactFormContainer').classList.remove('progress-active');
+            }
+        }
+
+        function updateSteps(filledFields) {
+            const steps = document.querySelectorAll('.step');
+            steps.forEach((step, index) => {
+                const stepNumber = index + 1;
+                step.classList.remove('active', 'completed');
+                
+                if (filledFields >= stepNumber) {
+                    step.classList.add('completed');
+                } else if (filledFields === stepNumber - 1) {
+                    step.classList.add('active');
+                }
+            });
+        }
+
+        function validateField(fieldName, value) {
+            switch(fieldName) {
+                case 'name':
+                    return value.trim().length >= 3;
+                case 'phone':
+                    return value.trim().length >= 8 && /^\+?\d+$/.test(value.replace(/\s/g, ''));
+                case 'plan':
+                    return value !== '';
+                case 'message':
+                    return value.trim().length >= 1; // Cambiado de 10 a 1 carácter
+                default:
+                    return false;
+            }
+        }
+
+        function updateFieldStatus(fieldName, isFilled) {
+            const fieldCard = document.querySelector(`[data-field="${fieldName}"]`);
+            const statusIcon = fieldCard.querySelector('.field-status i');
+            
+            if (isFilled) {
+                fieldCard.classList.add('filled');
+                statusIcon.style.display = 'block';
+            } else {
+                fieldCard.classList.remove('filled');
+                statusIcon.style.display = 'none';
+            }
+        }
+
+        // Event listeners para los campos del formulario
+        document.getElementById('name').addEventListener('input', function() {
+            const isValid = validateField('name', this.value);
+            formFields.name = isValid;
+            updateFieldStatus('name', isValid);
+            updateProgress();
+        });
+
+        document.getElementById('phone').addEventListener('input', function() {
+            const isValid = validateField('phone', this.value);
+            formFields.phone = isValid;
+            updateFieldStatus('phone', isValid);
+            updateProgress();
+        });
+
+        document.getElementById('plan').addEventListener('change', function() {
+            const isValid = validateField('plan', this.value);
+            formFields.plan = isValid;
+            updateFieldStatus('plan', isValid);
+            updateProgress();
+        });
+
+        document.getElementById('message').addEventListener('input', function() {
+            const isValid = validateField('message', this.value);
+            formFields.message = isValid;
+            updateFieldStatus('message', isValid);
+            updateProgress();
+            
+            // Actualizar contador de caracteres
+            document.getElementById('charCount').textContent = this.value.length;
+        });
+
+        // Efecto focus en los campos
+        document.querySelectorAll('.form-field-card').forEach(card => {
+            const input = card.querySelector('input, select, textarea');
+            
+            input.addEventListener('focus', () => {
+                card.classList.add('active');
+            });
+            
+            input.addEventListener('blur', () => {
+                card.classList.remove('active');
+            });
+        });
+
+        // Form Submission - Modificado para WhatsApp
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const formData = new FormData(this);
             const name = formData.get('name');
-            const email = formData.get('email');
             const phone = formData.get('phone');
             const plan = formData.get('plan');
             const message = formData.get('message');
             
-            const subject = 'Consulta desde IMPERIUM - Marketing Digital';
-            const body = `Nombre: ${name}\nEmail: ${email}\nTeléfono: ${phone}\nPlan de interés: ${plan}\n\nMensaje:\n${message}`;
+            // Construir mensaje para WhatsApp
+            const whatsappMessage = `👋 *Nueva Consulta desde IMPERIUM*%0A%0A📝 *Nombre:* ${name}%0A📞 *Teléfono:* ${phone}%0A👑 *Plan de interés:* ${plan}%0A💬 *Mensaje:* ${message}%0A%0A¡Gracias por contactarnos! Te responderemos a la brevedad posible.`;
             
-            window.location.href = `mailto:mundodigital930518@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            // Abrir WhatsApp con el mensaje prellenado
+            window.open(`https://wa.me/56578961?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
             
             // Show success message
             const formContainer = document.querySelector('.contact-form');
@@ -2527,26 +3109,43 @@
             successMessage.style.cssText = `
                 background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
                 color: white;
-                padding: 1rem;
-                border-radius: 10px;
-                margin-top: 1rem;
+                padding: 1.5rem;
+                border-radius: 15px;
+                margin-top: 2rem;
                 text-align: center;
                 font-weight: 600;
+                animation: fadeInUp 0.5s ease;
             `;
-            successMessage.textContent = '¡Mensaje enviado! Te contactaremos pronto.';
+            successMessage.innerHTML = `
+                <i class="fab fa-whatsapp" style="font-size: 2rem; margin-bottom: 0.5rem; display: block;"></i>
+                ¡Redirigiendo a WhatsApp! Tu consulta ha sido enviada.
+            `;
             
             formContainer.appendChild(successMessage);
             this.reset();
+            
+            // Resetear progreso
+            Object.keys(formFields).forEach(key => formFields[key] = false);
+            document.querySelectorAll('.form-field-card').forEach(card => {
+                card.classList.remove('filled');
+                const statusIcon = card.querySelector('.field-status i');
+                statusIcon.style.display = 'none';
+            });
+            updateProgress();
+            document.getElementById('charCount').textContent = '0';
             
             setTimeout(() => {
                 successMessage.remove();
             }, 5000);
         });
 
-        // Función mejorada para seleccionar plan
+        // Función mejorada para seleccionar plan - Cambia fondo a azul
         function selectPlan(planName, planPrice) {
             selectedPlan = planName;
             selectedPrice = planPrice;
+            
+            // Cambiar el fondo a azul
+            document.body.classList.add('blue-theme');
             
             // Mostrar información en el modal
             document.getElementById('selectedPlanName').textContent = planName;
@@ -2558,6 +3157,11 @@
             
             // Prevenir scroll del body
             document.body.style.overflow = 'hidden';
+            
+            // Animación de entrada del fondo azul
+            setTimeout(() => {
+                document.body.style.transition = 'background 0.5s ease';
+            }, 100);
         }
 
         // Contactar vía WhatsApp
@@ -2575,7 +3179,19 @@
             closePlanModal();
             
             // Establecer el plan en el formulario
-            document.getElementById('plan').value = selectedPlan.toLowerCase();
+            const planSelect = document.getElementById('plan');
+            const planMap = {
+                'Básico': 'basico',
+                'Intermedio': 'intermedio',
+                'Premium': 'premium'
+            };
+            
+            if (planMap[selectedPlan]) {
+                planSelect.value = planMap[selectedPlan];
+                formFields.plan = true;
+                updateFieldStatus('plan', true);
+                updateProgress();
+            }
             
             // Hacer scroll al formulario
             setTimeout(() => {
@@ -2602,6 +3218,11 @@
             const modal = document.getElementById('planModal');
             modal.classList.remove('show');
             document.body.style.overflow = 'auto';
+            
+            // Opcional: Restaurar el fondo original después de un tiempo
+            setTimeout(() => {
+                document.body.classList.remove('blue-theme');
+            }, 500);
         }
 
         // Cerrar modal al hacer clic fuera
