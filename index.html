@@ -422,7 +422,7 @@
 
         /* Sections */
         section {
-            padding: 6rem 0;
+            padding: 5rem 0;
             position: relative;
         }
 
@@ -2075,6 +2075,41 @@
 
             .step {
                 flex: 0 0 100%;
+            }
+        }
+
+        /* CORRECCIÓN MEJORADA - Eliminar espacio vacío en móviles */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: auto;
+                padding-top: 100px;
+                padding-bottom: 1rem;
+            }
+            
+            /* Reducir espacio entre secciones */
+            section {
+                padding: 3rem 0;
+            }
+            
+            .about {
+                padding-top: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                min-height: auto;
+                padding-top: 80px;
+                padding-bottom: 0.5rem;
+            }
+            
+            /* Reducir aún más el espacio entre secciones */
+            section {
+                padding: 2rem 0;
+            }
+            
+            .about {
+                padding-top: 1rem;
             }
         }
     </style>
